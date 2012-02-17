@@ -15,13 +15,14 @@ http://maven.in.nuxeo.com/nexus/content/repositories/daily-snapshots/org/nuxeo/e
 
 ## Cleanup the core server distrib
 
-There are some libs in Core Server distrib that should not be there :
+There are some libs in Core Server distrib that should not be there and don't work with CDI/JSF2 :
 
     rm nxserver/bundles/nuxeo-platform-ui-*
     rm nxserver/lib/jsf-*
     rm nxserver/lib/*seam*.jar
     rm nxserver/bundles/*seam*.jar
     rm nxserver/lib/jstl-1.1.2.jar
+    rm nxserver/lib/richfaces*
 
 ## Remove libs that break CDI
 
@@ -57,6 +58,19 @@ Simply replace the ./templates/common/META-INF/templates/faces-config.xml with a
           http://java.sun.com/xml/ns/javaee
           http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
     </faces-config>
+
+## Bind the BeanManager
+
+The BeanManager must be bound inside the context.
+
+    vim templates/default/conf/Catalina/localhost/nuxeo.xml
+
+Add a new Resource :
+
+     <Resource name="BeanManager" 
+      auth="Container"
+      type="javax.enterprise.inject.spi.BeanManager"
+      factory="org.jboss.weld.resources.ManagerObjectFactory"/>
 
 ## Build the sample
 

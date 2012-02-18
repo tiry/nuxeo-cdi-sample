@@ -1,0 +1,115 @@
+<project name="ecp-distribution-tomcat" default="build" xmlns:nx="urn:nuxeo-build"
+  xmlns:artifact="urn:nuxeo-artifact">
+
+  <taskdef resource="org/nuxeo/build/antlib.xml" uri="urn:nuxeo-build" />
+  <taskdef resource="org/nuxeo/build/artifact/antlib.xml"
+    uri="urn:nuxeo-artifact" />
+
+  <target name="init" unless="init.done">
+    <property name="outdir" value="${maven.project.build.directory}" />
+    <property name="stagedir" value="${outdir}/stage" />
+    <property name="tomcat" value="nuxeo-cdi-${maven.project.version}-tomcat" />
+    <property name="tomcatdir" value="${stagedir}/${tomcat}" />
+    <property name="bundles" value="${stagedir}/${tomcat}/nxserver/bundles" />
+
+    <antcall target="cleanoutput" />
+
+    <antcall target="expand" />
+    <property name="init.done" value="true" />
+
+  </target>
+
+  <target name="expand" unless="no.build">
+    <artifact:expand depth="5"/>
+    <!--<artifact:print output="dependency-tree.log" />-->
+  </target>
+
+  <target name="build" depends="init">
+    <echo>Building CDI Core Server Tomcat Distribution</echo>
+
+    <antcall target="build-standard" />
+    <antcall target="cleanstage" />
+  </target>
+
+
+
+  <target name="build-standard" description="Build default distribution"
+    depends="init">
+
+    <unzip dest="${stagedir}">
+      <artifact:resolveFile key="org.nuxeo.ecm.distribution:nuxeo-distribution-tomcat:${nuxeo.addons.version}:zip"
+        classifier="coreserver"/>
+
+    </unzip>
+    <nx:rename from="${stagedir}/coreserver*" to="${tomcatdir}" />
+
+    <delete failonerror="false">
+      <fileset dir="${tomcatdir}/nxserver/bundles">
+        <include name="nuxeo-platform-ui-*" />
+        <include name="*seam*.jar" />
+      </fileset>
+    </delete>
+
+    <delete failonerror="false">
+      <fileset dir="${tomcatdir}/nxserver/lib">
+        <include name="jsf-*" />
+        <include name="*seam*.jar" />
+        <include name="jstl-*" />
+        <include name="richfaces*" />
+        <include name="javassist*" />
+      </fileset>
+    </delete>
+
+    <copy todir="${bundles}" overwrite="true">
+      <artifact:set>
+        <includes>
+          <artifact artifactId="nuxeo-cdi-sample" />
+        </includes>
+      </artifact:set>
+    </copy>
+
+    <copy todir="${tomcatdir}/nxserver/lib" overwrite="true">
+      <artifact:set>
+        <includes>
+          <artifact artifactId="weld-servlet" />
+          <artifact artifactId="weld-build-config" />
+          <artifact artifactId="jsr250-api" />
+        </includes>
+      </artifact:set>
+    </copy>
+
+    <copy todir="${tomcatdir}/lib" overwrite="true">
+      <artifact:set>
+        <includes>
+          <artifact artifactId="jsf-api" />
+          <artifact artifactId="jsf-impl" />
+          <artifact artifactId="jstl" />
+        </includes>
+      </artifact:set>
+    </copy>
+
+    <copy todir="${tomcatdir}/templates" overwrite="true">
+      <fileset dir="src/main/resources/templates" />
+    </copy>
+
+    <chmod dir="${tomcatdir}/bin" perm="750" includes="*.sh,*ctl" />
+
+    <zip destfile="${outdir}/nuxeo-cdi-${maven.project.version}-tomcat.zip"
+      basedir="${stagedir}"
+      includes="${tomcat}/**" />
+
+    <artifact:attach file="${outdir}/${maven.project.artifactId}-${maven.project.version}-tomcat.zip"
+       target="${maven.project.groupId}:${maven.project.artifactId}"
+       type="zip" />
+
+  </target>
+
+  <target name="cleanstage">
+    <delete dir="${stagedir}" />
+  </target>
+
+  <target name="cleanoutput">
+    <delete dir="${tomcatdir}"/>
+  </target>
+
+</project>

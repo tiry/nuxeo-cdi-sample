@@ -1,6 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>org.nuxeo</groupId>
@@ -8,139 +9,124 @@
     <version>5.6-SNAPSHOT</version>
   </parent>
 
-
-  <modelVersion>4.0.0</modelVersion>
   <groupId>org.nuxeo.features</groupId>
-  <artifactId>nuxeo-cdi-sample</artifactId>
-  <name>Sample CDI deployment with Nuxeo</name>
+  <artifactId>nuxeo-cdi-parent</artifactId>
+  <name>Nuxeo CDI Sample Parent</name>
+  <description>Nuxeo CDI Sample Parent</description>
   <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
   <properties>
+    <nuxeo.cdi.version>1.0-SNAPSHOT</nuxeo.cdi.version>
     <weld.version>1.1.5.Final</weld.version>
     <jsf.version>2.0.2-FCS</jsf.version>
     <facelets.version>1.1.15</facelets.version>
     <cdi.api.version>1.1.EDR1.2</cdi.api.version>
   </properties>
 
-  <dependencies>
+  <modules>
+    <module>nuxeo-cdi-sample</module>
+  </modules>
 
-    <dependency>
-      <groupId>javax.enterprise</groupId>
-      <artifactId>cdi-api</artifactId>
-      <scope>provided</scope>
-      <version>${cdi.api.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.jboss.weld.servlet</groupId>
-      <artifactId>weld-servlet</artifactId>
-      <scope>provided</scope>
-      <version>${weld.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>javax.annotation</groupId>
-      <artifactId>jsr250-api</artifactId>
-      <version>1.0</version>
-    </dependency>
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>jstl</artifactId>
-      <version>1.2</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>javax.faces</groupId>
-      <artifactId>jsf-api</artifactId>
-      <version>${jsf.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>javax.faces</groupId>
-      <artifactId>jsf-impl</artifactId>
-      <version>${jsf.version}</version>
-    </dependency>
+  <profiles>
+    <profile>
+      <id>distribution</id>
+      <modules>
+        <module>nuxeo-cdi-distribution</module>
+      </modules>
+    </profile>
+  </profiles>
 
-    <dependency>
-      <groupId>org.nuxeo.common</groupId>
-      <artifactId>nuxeo-common</artifactId>
-      <exclusions>
-        <exclusion>
-          <groupId>xerces</groupId>
-          <artifactId>xercesImpl</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.nuxeo.runtime</groupId>
-      <artifactId>nuxeo-runtime</artifactId>
-      <exclusions>
-        <exclusion>
-          <groupId>xerces</groupId>
-          <artifactId>xercesImpl</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.nuxeo.ecm.core</groupId>
-      <artifactId>nuxeo-core-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.nuxeo.ecm.core</groupId>
-      <artifactId>nuxeo-core-event</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.nuxeo.ecm.core</groupId>
-      <artifactId>nuxeo-core</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>javax.transaction</groupId>
-      <artifactId>jta</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.nuxeo.ecm.platform</groupId>
-      <artifactId>nuxeo-platform-types-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.nuxeo.ecm.platform</groupId>
-      <artifactId>nuxeo-platform-types-core</artifactId>
-      <scope>test</scope>
-    </dependency>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.nuxeo.features</groupId>
+        <artifactId>nuxeo-cdi-sample</artifactId>
+        <version>${nuxeo.cdi.version}</version>
+      </dependency>
 
-  </dependencies>
+      <dependency>
+        <groupId>javax.enterprise</groupId>
+        <artifactId>cdi-api</artifactId>
+        <scope>provided</scope>
+        <version>${cdi.api.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.weld.servlet</groupId>
+        <artifactId>weld-servlet</artifactId>
+        <scope>provided</scope>
+        <version>${weld.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>javax.annotation</groupId>
+        <artifactId>jsr250-api</artifactId>
+        <version>1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>jstl</artifactId>
+        <version>1.2</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>javax.faces</groupId>
+        <artifactId>jsf-api</artifactId>
+        <version>${jsf.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>javax.faces</groupId>
+        <artifactId>jsf-impl</artifactId>
+        <version>${jsf.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
+  <repositories>
+    <repository>
+      <id>public</id>
+      <url>http://maven.nuxeo.org/nexus/content/groups/public</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>public-snapshot</id>
+      <url>http://maven.nuxeo.org/nexus/content/groups/public-snapshot</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <!--        <version>2.4</version>-->
-        <executions>
-          <execution>
-            <id>copy-tomcat</id>
-            <phase>package</phase>
-            <goals>
-              <goal>copy-dependencies</goal>
-            </goals>
-            <configuration>
-              <includeGroupIds>javax.faces,javax.servlet</includeGroupIds>
-              <excludeArtifactIds>servlet-api</excludeArtifactIds>
-              <outputDirectory>${project.build.directory}/tomcat-lib</outputDirectory>
-            </configuration>
-          </execution>
-          <execution>
-            <id>copy-nuxeo</id>
-            <phase>package</phase>
-            <goals>
-              <goal>copy-dependencies</goal>
-            </goals>
-            <configuration>
-              <includeGroupIds>org.jboss.weld,javax.annotation</includeGroupIds>
-              <outputDirectory>${project.build.directory}/nuxeo-lib</outputDirectory>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>public</id>
+      <url>http://maven.nuxeo.org/nexus/content/groups/public</url>
+      <name>Nuxeo virtual release repository</name>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </pluginRepository>
+    <pluginRepository>
+      <id>public-snapshot</id>
+      <url>http://maven.nuxeo.org/nexus/content/groups/public-snapshot</url>
+      <name>Nuxeo virtual snapshot repository</name>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
 
 </project>

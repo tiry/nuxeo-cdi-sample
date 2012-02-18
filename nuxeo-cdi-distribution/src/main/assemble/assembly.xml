@@ -43,6 +43,7 @@
     </unzip>
     <nx:rename from="${stagedir}/coreserver*" to="${tomcatdir}" />
 
+    <!-- delete libs that don't work with CDI/JSF2-->
     <delete failonerror="false">
       <fileset dir="${tomcatdir}/nxserver/bundles">
         <include name="nuxeo-platform-ui-*" />
@@ -60,14 +61,7 @@
       </fileset>
     </delete>
 
-    <copy todir="${bundles}" overwrite="true">
-      <artifact:set>
-        <includes>
-          <artifact artifactId="nuxeo-cdi-sample" />
-        </includes>
-      </artifact:set>
-    </copy>
-
+    <!-- copy Weld libs -->
     <copy todir="${tomcatdir}/nxserver/lib" overwrite="true">
       <artifact:set>
         <includes>
@@ -78,6 +72,7 @@
       </artifact:set>
     </copy>
 
+    <!-- copy JSF 2 libs -->
     <copy todir="${tomcatdir}/lib" overwrite="true">
       <artifact:set>
         <includes>
@@ -88,6 +83,16 @@
       </artifact:set>
     </copy>
 
+    <!-- copy -->
+    <copy todir="${bundles}" overwrite="true">
+      <artifact:set>
+        <includes>
+          <artifact artifactId="nuxeo-cdi-sample" />
+        </includes>
+      </artifact:set>
+    </copy>
+
+    <!-- copy customized templates for CDI -->
     <copy todir="${tomcatdir}/templates" overwrite="true">
       <fileset dir="src/main/resources/templates" />
     </copy>

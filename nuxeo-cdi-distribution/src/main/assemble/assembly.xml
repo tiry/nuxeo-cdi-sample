@@ -26,9 +26,8 @@
 
   <target name="build" depends="init">
     <echo>Building CDI Core Server Tomcat Distribution</echo>
-
-    <antcall target="build-standard" />
     <antcall target="cleanstage" />
+    <antcall target="build-standard" />
   </target>
 
 

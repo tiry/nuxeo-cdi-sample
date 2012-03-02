@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core">
+
+   <ui:composition template="/numberguess/template.xhtml">
+      <ui:define name="content">
+         <h1>Guess a number...</h1>
+         <h:form id="numberGuess">
+            <div style="color: red">
+               <h:messages id="messages" globalOnly="false"/>
+               <h:outputText id="Higher" value="Higher!" rendered="#{gameConversation.number gt gameConversation.guess and gameConversation.guess ne 0}"/>
+               <h:outputText id="Lower" value="Lower!" rendered="#{gameConversation.number lt gameConversation.guess and gameConversation.guess ne 0}"/>
+            </div>
+    
+            <div>
+               I'm thinking of a number between <span id="numberGuess:smallest">#{gameConversation.smallest}</span> and <span id="numberGuess:biggest">#{gameConversation.biggest}</span>. You have #{gameConversation.remainingGuesses} guesses remaining.
+            </div>
+       
+            <div>
+               Your guess:
+               <h:inputText id="inputGuess" value="#{gameConversation.guess}"
+                  required="true" size="3" disabled="#{gameConversation.number eq gameConversation.guess}" validator="#{gameConversation.validateNumberRange}"/>
+               <h:commandButton id="guessButton" value="Guess" action="#{gameConversation.check}" disabled="#{gameConversation.number eq gameConversation.guess}"/>
+            </div>
+            <div>
+               <h:commandButton id="restartButton" value="End Conversation" action="#{gameConversation.endConversation}" immediate="true"/>
+            </div>
+         </h:form>
+      </ui:define>
+   </ui:composition>
+</html>

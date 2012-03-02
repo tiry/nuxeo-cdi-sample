@@ -41,6 +41,14 @@
 
   </extension>
 
+  <extension target="web#STD-AUTH-FILTER">
+    <!-- auth filter configuration, filter is defined in web-common -->
+    <filter-mapping>
+      <filter-name>NuxeoAuthenticationFilter</filter-name>
+      <url-pattern>*.faces</url-pattern>
+    </filter-mapping>
+  </extension>
+
   <install>
     <!-- unzip the war template -->
     <unzip from="${bundle.fileName}" to="/" prefix="web">

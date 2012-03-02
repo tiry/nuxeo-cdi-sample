@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:f="http://java.sun.com/jsf/core">
+
+   <h1> Using injected SchemaManager in a CDI bean </h1>
+
+   <table>
+     <tr>
+      <td>
+	   <h2>Available types </h2>
+	   <ul>
+	   <ui:repeat value="#{testServiceBean.types}" var="type">
+	     <li><h:outputText  value="#{type.name}"/> </li>   
+	   </ui:repeat>
+	   </ul>
+	  </td>
+	  <td>
+	   <h2>Available Document types </h2>
+	   <ul>
+	   <ui:repeat value="#{testServiceBean.docTypes}" var="docType">
+	     <li><h:outputText  value="#{docType.name}"/>	        
+	       <ul>
+	         <ui:repeat value="#{docType.schemaNames}" var="schema">
+	            <li> <h:outputText  value="#{schema}"/></li>
+	         </ui:repeat>
+	       </ul>
+	     </li>   
+	   </ui:repeat>
+	   </ul>
+	  </td>
+	 </tr>
+	</table>
+</html>

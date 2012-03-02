@@ -1,7 +1,2 @@
-<html>
-
-<ul>
- <li> <A href="numberguess/home.faces">Weld Number guess sample</A> </li>
-</ul>
-
-</html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:redirect url="/login.jsp" />

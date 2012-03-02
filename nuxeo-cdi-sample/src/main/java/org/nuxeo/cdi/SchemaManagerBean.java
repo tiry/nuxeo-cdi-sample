@@ -14,11 +14,11 @@ import org.nuxeo.runtime.api.Framework;
 public class SchemaManagerBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
-        
+    /*
     @Produces @RequestScoped    
     public SchemaManager getSchemaManager() throws Exception {
         return Framework.getLocalService(SchemaManager.class);
-    }
+    }*/
  
     
 }

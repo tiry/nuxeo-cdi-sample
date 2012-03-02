@@ -15,12 +15,13 @@ public class TestServiceBean {
     @Inject
     protected SchemaManager schemaManager;
     
+    
     public Type[] getTypes() {        
         return schemaManager.getTypes();
     }
     
-    public DocumentType[] getDocTypes() {
+    public DocumentType[] getDocTypes() { 
         return schemaManager.getDocumentTypes();
     }
-    
+            
 }

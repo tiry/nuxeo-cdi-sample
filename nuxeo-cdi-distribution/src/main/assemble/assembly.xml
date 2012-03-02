@@ -2,8 +2,7 @@
   xmlns:artifact="urn:nuxeo-artifact">
 
   <taskdef resource="org/nuxeo/build/antlib.xml" uri="urn:nuxeo-build" />
-  <taskdef resource="org/nuxeo/build/artifact/antlib.xml"
-    uri="urn:nuxeo-artifact" />
+  <taskdef resource="org/nuxeo/build/artifact/antlib.xml" uri="urn:nuxeo-artifact" />
 
   <target name="init" unless="init.done">
     <property name="outdir" value="${maven.project.build.directory}" />
@@ -13,15 +12,13 @@
     <property name="bundles" value="${stagedir}/${tomcat}/nxserver/bundles" />
 
     <antcall target="cleanoutput" />
-
     <antcall target="expand" />
     <property name="init.done" value="true" />
-
   </target>
 
   <target name="expand" unless="no.build">
-    <artifact:expand depth="5"/>
-    <!--<artifact:print output="dependency-tree.log" />-->
+    <artifact:expand depth="5" />
+    <!--<artifact:print output="dependency-tree.log" /> -->
   </target>
 
   <target name="build" depends="init">
@@ -30,19 +27,17 @@
     <antcall target="build-standard" />
   </target>
 
-
-
   <target name="build-standard" description="Build default distribution"
     depends="init">
 
     <unzip dest="${stagedir}">
-      <artifact:resolveFile key="org.nuxeo.ecm.distribution:nuxeo-distribution-tomcat:${nuxeo.addons.version}:zip"
-        classifier="coreserver"/>
-
+      <artifact:resolveFile
+        key="org.nuxeo.ecm.distribution:nuxeo-distribution-tomcat:${nuxeo.addons.version}:zip"
+        classifier="coreserver" />
     </unzip>
     <nx:rename from="${stagedir}/coreserver*" to="${tomcatdir}" />
 
-    <!-- delete libs that don't work with CDI/JSF2-->
+    <!-- delete libs that don't work with CDI/JSF2 -->
     <delete failonerror="false">
       <fileset dir="${tomcatdir}/nxserver/bundles">
         <include name="nuxeo-platform-ui-*" />
@@ -99,12 +94,11 @@
     <chmod dir="${tomcatdir}/bin" perm="750" includes="*.sh,*ctl" />
 
     <zip destfile="${outdir}/nuxeo-cdi-${maven.project.version}-tomcat.zip"
-      basedir="${stagedir}"
-      includes="${tomcat}/**" />
+      basedir="${stagedir}" includes="${tomcat}/**" />
 
-    <artifact:attach file="${outdir}/${maven.project.artifactId}-${maven.project.version}-tomcat.zip"
-       target="${maven.project.groupId}:${maven.project.artifactId}"
-       type="zip" />
+    <artifact:attach
+      file="${outdir}/${maven.project.artifactId}-${maven.project.version}-tomcat.zip"
+      target="${maven.project.groupId}:${maven.project.artifactId}" type="zip" />
 
   </target>
 
@@ -113,7 +107,7 @@
   </target>
 
   <target name="cleanoutput">
-    <delete dir="${tomcatdir}"/>
+    <delete dir="${tomcatdir}" />
   </target>
 
 </project>

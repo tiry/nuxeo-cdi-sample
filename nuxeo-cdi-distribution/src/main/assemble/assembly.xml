@@ -83,7 +83,17 @@
       </artifact:set>
     </copy>
 
-    <!-- copy -->
+    <!-- copy Nuxeo JSF modules -->
+    <copy todir="${bundles}" overwrite="true">
+      <artifact:set>
+        <includes>
+          <artifact artifactId="nuxeo-platform-ui*" />
+          <artifact artifactId="nuxeo-platform-forms*" />
+        </includes>
+      </artifact:set>
+    </copy>
+
+    <!-- copy local modules -->
     <copy todir="${bundles}" overwrite="true">
       <artifact:set>
         <includes>

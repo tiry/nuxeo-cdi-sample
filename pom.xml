@@ -22,6 +22,7 @@
     <facelets.version>1.1.15</facelets.version>
     <cdi.api.version>1.1.EDR1.2</cdi.api.version>
     <richfaces.version>4.2.0.Final</richfaces.version>
+    <nuxeo.jsf.version>5.6-cdi-SNAPSHOT</nuxeo.jsf.version>
   </properties>
 
   <modules>
@@ -29,6 +30,12 @@
   </modules>
 
   <profiles>
+    <profile>
+      <id>dist</id>
+      <modules>
+        <module>nuxeo-cdi-distribution</module>
+      </modules>
+    </profile>
     <profile>
       <id>distribution</id>
       <modules>
@@ -39,12 +46,14 @@
 
   <dependencyManagement>
     <dependencies>
+      <!-- local deps -->
       <dependency>
         <groupId>org.nuxeo.features</groupId>
         <artifactId>nuxeo-cdi-sample</artifactId>
         <version>${nuxeo.cdi.version}</version>
       </dependency>
 
+      <!-- external deps -->
       <dependency>
         <groupId>javax.enterprise</groupId>
         <artifactId>cdi-api</artifactId>
@@ -102,6 +111,35 @@
         <version>1.3</version>
       </dependency>
       <!-- end of richfaces deps -->
+
+      <!-- Nuxeo services deps -->
+      <dependency>
+        <groupId>org.nuxeo.ecm.platform</groupId>
+        <artifactId>nuxeo-platform-forms-layout-core</artifactId>
+        <version>${nuxeo.services.version}</version>
+      </dependency>
+
+      <!-- Nuxeo JSF deps -->
+      <dependency>
+        <groupId>org.nuxeo.ecm.platform</groupId>
+        <artifactId>nuxeo-platform-ui-api</artifactId>
+        <version>${nuxeo.jsf.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.nuxeo.ecm.platform</groupId>
+        <artifactId>nuxeo-platform-ui-jsf</artifactId>
+        <version>${nuxeo.jsf.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.nuxeo.ecm.platform</groupId>
+        <artifactId>nuxeo-platform-forms-layout-io</artifactId>
+        <version>${nuxeo.jsf.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.nuxeo.ecm.platform</groupId>
+        <artifactId>nuxeo-platform-forms-layout-client</artifactId>
+        <version>${nuxeo.jsf.version}</version>
+      </dependency>
 
     </dependencies>
   </dependencyManagement>

@@ -10,6 +10,7 @@
 <%
 String productName = Framework.getProperty("org.nuxeo.ecm.product.name");
 String productVersion = Framework.getProperty("org.nuxeo.ecm.product.version");
+String testerName = Framework.getProperty("org.nuxeo.ecm.tester.name");
 String context = request.getContextPath();
 Locale locale = request.getLocale();
 String language = locale == null ? "en" : locale.getLanguage();
@@ -214,15 +215,9 @@ body {
 -->
 </style>
 
-<script type="text/javascript">
-function focusOn(eltId) {
-  document.getElementById(eltId).focus();
-}
-</script>
-
 </head>
 
-<body onload="focusOn('username')">
+<body>
 
 <table cellspacing="0" cellpadding="0" border="0" width="100%" height="100%">
   <tbody>
@@ -259,7 +254,7 @@ function focusOn(eltId) {
     <tr>
       <td align="center">
         <%@ include file="login_welcome.jsp" %>
-        <form method="post" action="/nuxeo/numberguess/home.faces">
+        <form method="post" action="nxstartup.faces">
           <!-- To prevent caching -->
           <%
               response.setHeader("Cache-Control", "no-cache"); // HTTP 1.1
@@ -411,7 +406,7 @@ function focusOn(eltId) {
         </form>
       </td>
       <td class="news_container" align="right" valign="center">
-        <% if (!request.getHeader("User-Agent").contains("Nuxeo-Selenium-Tester")) { %>
+        <% if (!"Nuxeo-Selenium-Tester".equals(testerName)) { %>
           <iframe class="block_container" style="visibility:hidden"
             onload="javascript:this.style.visibility='visible';"
             src="https://www.nuxeo.com/embedded/dm-login"></iframe>
@@ -421,7 +416,9 @@ function focusOn(eltId) {
     <tr class="footer">
       <td align="center" valign="bottom">
       <div class="loginLegal">
-        <fmt:message bundle="${messages}" key="label.login.copyright" />
+        <fmt:message bundle="${messages}" key="label.login.copyright">
+          <fmt:param value="2012" />
+        </fmt:message>
       </div>
       </td>
       <td align="right" class="version" valign="bottom">
@@ -434,6 +431,10 @@ function focusOn(eltId) {
     </tr>
   </tbody>
 </table>
+
+<script type="text/javascript">
+  document.getElementById('username').focus();
+</script>
 
 <!--   Current User = <%=request.getRemoteUser()%> -->
 

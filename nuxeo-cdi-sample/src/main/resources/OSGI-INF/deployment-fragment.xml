@@ -2,15 +2,12 @@
 <fragment version="1">
 
   <extension target="web#LISTENER">
-    <context-param>
-      <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
-      <param-value>.xhtml</param-value>
-    </context-param>
     <listener>
       <listener-class>org.jboss.weld.environment.servlet.Listener
       </listener-class>
     </listener>
   </extension>
+
   <extension target="web#SERVLET">
     <servlet>
       <servlet-name>Faces Servlet</servlet-name>
@@ -38,6 +35,49 @@
   </extension>
 
   <extension target="faces-config#NAVIGATION">
+
+  </extension>
+
+  <extension target="web#CONTEXT-PARAM">
+    <context-param>
+      <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+      <!-- XXX warning: before changing this value, note that some libraries may
+        not like the client saving method (gwt for instance) -->
+      <!-- <param-value>client</param-value> -->
+      <param-value>server</param-value>
+    </context-param>
+
+    <context-param>
+      <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+      <param-value>.xhtml</param-value>
+    </context-param>
+
+    <!-- When a page is requested, what interval in seconds should the compiler
+      check for changes. If you don't want the compiler to check for changes
+      once the page is compiled, then use a value of -1.
+
+      Setting a low refresh period helps during development to be able to edit
+      pages in a running application but slows down page rendering.
+
+      Default: 2 seconds.
+    -->
+    <context-param>
+      <param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
+      <param-value>2</param-value>
+    </context-param>
+
+    <!-- TODO: migrate to JSF2 -->
+    <!--
+      <context-param>
+      <param-name>com.sun.faces.responseBufferSize</param-name>
+      <param-value>500000</param-value>
+      </context-param>
+    -->
+
+    <context-param>
+      <param-name>javax.faces.FACELETS_BUFFER_SIZE</param-name>
+      <param-value>500000</param-value>
+    </context-param>
 
   </extension>
 

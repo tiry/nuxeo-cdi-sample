@@ -56,7 +56,9 @@
     </delete>
 
     <!-- copy Weld libs -->
-    <copy todir="${tomcatdir}/nxserver/lib" overwrite="true">
+    <!-- FIXME: avoid error on dep to javax.enterprise.spi.inject.Extension
+      by moving libs to tomcat/lib instead of tomcat/nxserver/lib -->
+    <copy todir="${tomcatdir}/lib" overwrite="true">
       <artifact:set>
         <includes>
           <artifact artifactId="weld-servlet" />
@@ -73,6 +75,10 @@
           <artifact artifactId="jsf-api" />
           <artifact artifactId="jsf-impl" />
           <artifact artifactId="jstl" />
+          <artifact artifactId="richfaces*" />
+          <artifact artifactId="guava" />
+          <artifact artifactId="cssparser" />
+          <artifact artifactId="sac" />
         </includes>
       </artifact:set>
     </copy>

@@ -1,4 +1,4 @@
-## What is it for?
+# What is it for?
 
 This is a sample plugin to test CDI integration with Nuxeo service
 platform.
@@ -6,9 +6,9 @@ platform.
 For now it does not much, but it runs CDI/JSF2 components from a Nuxeo
 bundle deployed in a Nuxeo server ... that's a start ...
 
-## Installation
+# Installation
 
-# Build dependencies
+## Build dependencies
 
     $ cd /my/workspaces/nuxeo
     $ git co feature-NXP-8977-cdi-sample
@@ -17,7 +17,7 @@ bundle deployed in a Nuxeo server ... that's a start ...
     $ git co feature-NXP-8977-cdi-sample
     $ mvn -Dmaven.test.skip=true clean install
 
-# Build the custom Nuxeo CDI Distribution
+## Build the custom Nuxeo CDI Distribution
 
     $ mvn clean install -Pdist
 

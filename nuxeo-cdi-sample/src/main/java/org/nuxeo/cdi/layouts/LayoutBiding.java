@@ -15,7 +15,13 @@ public class LayoutBiding implements Serializable {
 
     protected String description;
 
+    public LayoutBiding() {
+    }
+
     public String getTitle() {
+        if (title == null) {
+            title = "Bonjour";
+        }
         return title;
     }
 
@@ -24,6 +30,9 @@ public class LayoutBiding implements Serializable {
     }
 
     public String getDescription() {
+        if (description == null) {
+            description = "tout le monde !";
+        }
         return description;
     }
 

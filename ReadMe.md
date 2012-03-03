@@ -30,3 +30,11 @@ The `nuxeo-cdi-sample` bundle is already deployed.
 
 See the `nuxeo-cdi-distribution/src/main/assemble/assembly.xml` file
 for how the custom distribution is built.
+
+# Hot reload
+
+xhtml files can be hot reloaded on the running server:
+* copy build.properties.sample to build.properties, and set your
+  server home path in variable tomcat.dir
+* in nuxeo-cdi-sample module, run "ant" to deploy xhtml files that
+  have changed on running server

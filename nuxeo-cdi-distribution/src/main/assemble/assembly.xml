@@ -79,6 +79,8 @@
           <artifact artifactId="nuxeo-platform-ui*" />
           <artifact artifactId="nuxeo-platform-forms*" />
           <artifact artifactId="nuxeo-platform-lang*" />
+          <artifact artifactId="nuxeo-platform-default-config" />
+          <artifact artifactId="nuxeo-platform-webapp-types" />
         </includes>
       </artifact:set>
     </copy>

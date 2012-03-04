@@ -115,6 +115,12 @@
         <artifactId>validation-api</artifactId>
         <version>1.0.0.GA</version>
       </dependency>
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <!-- upgrade from 3.1.0.GA to comply with JSR 303 for CDI -->
+        <version>4.2.0.Final</version>
+      </dependency>
       <!-- end of richfaces deps -->
 
       <!-- Nuxeo JSF deps override -->

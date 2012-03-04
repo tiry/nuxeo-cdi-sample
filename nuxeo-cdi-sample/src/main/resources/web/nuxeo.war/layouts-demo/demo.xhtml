@@ -4,7 +4,10 @@
    xmlns:ui="http://java.sun.com/jsf/facelets"
    xmlns:h="http://java.sun.com/jsf/html"
    xmlns:f="http://java.sun.com/jsf/core"
-   xmlns:nxl="http://nuxeo.org/nxforms/layout">
+   xmlns:nxl="http://nuxeo.org/nxforms/layout"
+   xmlns:nxh="http://nuxeo.org/nxweb/html"
+   xmlns:nxu="http://nuxeo.org/nxweb/util"
+   xmlns:nxdir="http://nuxeo.org/nxdirectory">
 
 <f:view>
 
@@ -13,6 +16,8 @@
   </h:head>
 
   <h:body>
+
+    <h:messages />
 
     <table border="1">
       <thead>
@@ -34,25 +39,42 @@
         <tr>
           <td>
             <h:form>
-              <nxl:layout name="heading" mode="edit" value="#{layoutBinding}" />
+              <nxl:layout name="heading" mode="edit"
+                value="#{layoutBinding}" />
               <h:commandButton value="Submit" />
             </h:form>
           </td>
 
           <td>
             <h:form>
-              <nxl:layout name="heading" mode="view" value="#{layoutBinding}" />
+              <nxl:layout name="heading" mode="view"
+                value="#{layoutBinding}" />
+            </h:form>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" align="center">
+            <b>Layout 'dublincore'</b>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h:form>
+              <nxl:layout name="dublincore" mode="edit"
+                value="#{layoutBinding.sampleDocumentModel}" />
+              <h:commandButton value="Submit" />
+            </h:form>
+          </td>
+
+          <td>
+            <h:form>
+              <nxl:layout name="dublincore" mode="view"
+                value="#{layoutBinding.sampleDocumentModel}" />
             </h:form>
           </td>
         </tr>
       </tbody>
     </table>
-    <div>
-    </div>
-
-    <div>
-    </div>
-
   </h:body>
 
 </f:view>

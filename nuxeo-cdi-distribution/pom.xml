@@ -21,6 +21,10 @@
     </dependency>
 
     <dependency>
+      <groupId>javax.enterprise</groupId>
+      <artifactId>cdi-api</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.jboss.weld.servlet</groupId>
       <artifactId>weld-servlet</artifactId>
     </dependency>
@@ -70,6 +74,14 @@
       <groupId>org.w3c.css</groupId>
       <artifactId>sac</artifactId>
     </dependency>
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+    </dependency>
     <!-- end of richfaces deps -->
 
     <!-- Nuxeo deps -->
@@ -103,7 +115,10 @@
       <groupId>org.nuxeo.ecm.platform</groupId>
       <artifactId>nuxeo-platform-forms-layout-client</artifactId>
     </dependency>
-
+    <dependency>
+      <groupId>org.nuxeo.ecm.platform</groupId>
+      <artifactId>nuxeo-platform-lang</artifactId>
+    </dependency>
 
   </dependencies>
 

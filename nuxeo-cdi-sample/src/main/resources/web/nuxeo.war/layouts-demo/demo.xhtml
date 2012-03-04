@@ -14,21 +14,43 @@
 
   <h:body>
 
--#{layoutBinding.title}-
+    <table border="1">
+      <thead>
+        <tr>
+          <th>
+            Edit mode
+          </th>
+          <th>
+            View mode
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="2" align="center">
+            <b>Layout 'heading'</b>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h:form>
+              <nxl:layout name="heading" mode="edit" value="#{layoutBinding}" />
+              <h:commandButton value="Submit" />
+            </h:form>
+          </td>
 
+          <td>
+            <h:form>
+              <nxl:layout name="heading" mode="view" value="#{layoutBinding}" />
+            </h:form>
+          </td>
+        </tr>
+      </tbody>
+    </table>
     <div>
-      Edit layout:
-      <h:form>
-        <nxl:layout name="heading" mode="edit" value="#{layoutBinding}" />
-        <h:commandButton value="Submit" />
-      </h:form>
     </div>
 
     <div>
-      View layout:
-      <h:form>
-        <nxl:layout name="heading" mode="view" value="#{layoutBinding}" />
-      </h:form>
     </div>
 
   </h:body>

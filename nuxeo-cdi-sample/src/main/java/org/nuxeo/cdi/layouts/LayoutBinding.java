@@ -7,7 +7,7 @@ import javax.inject.Named;
 
 @Named
 @SessionScoped
-public class LayoutBiding implements Serializable {
+public class LayoutBinding implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -15,13 +15,12 @@ public class LayoutBiding implements Serializable {
 
     protected String description;
 
-    public LayoutBiding() {
+    public LayoutBinding() {
+        title = "My title here";
+        description = "My description here";
     }
 
     public String getTitle() {
-        if (title == null) {
-            title = "Bonjour";
-        }
         return title;
     }
 
@@ -30,9 +29,6 @@ public class LayoutBiding implements Serializable {
     }
 
     public String getDescription() {
-        if (description == null) {
-            description = "tout le monde !";
-        }
         return description;
     }
 

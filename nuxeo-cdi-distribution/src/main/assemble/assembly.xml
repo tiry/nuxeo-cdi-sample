@@ -37,14 +37,7 @@
     </unzip>
     <nx:rename from="${stagedir}/coreserver*" to="${tomcatdir}" />
 
-    <!-- delete libs that don't work with CDI/JSF2 -->
-    <delete failonerror="false">
-      <fileset dir="${tomcatdir}/nxserver/bundles">
-        <include name="nuxeo-platform-ui-*" />
-        <include name="*seam*.jar" />
-      </fileset>
-    </delete>
-
+    <!-- delete libs that don't work with CDI/JSF2, some will be added back -->
     <delete failonerror="false">
       <fileset dir="${tomcatdir}/nxserver/lib">
         <include name="jsf-*" />
@@ -54,22 +47,16 @@
         <include name="javassist*" />
       </fileset>
     </delete>
+    <delete failonerror="false">
+      <fileset dir="${tomcatdir}/nxserver/bundles">
+        <include name="nuxeo-platform-ui-*" />
+        <include name="*seam*.jar" />
+      </fileset>
+    </delete>
 
-    <!-- copy Weld libs -->
-    <!-- FIXME: avoid error on dep to javax.enterprise.spi.inject.Extension
-      by moving libs to tomcat/lib instead of tomcat/nxserver/lib -->
-    <copy todir="${tomcatdir}/lib" overwrite="true">
-      <artifact:set>
-        <includes>
-          <artifact artifactId="weld-servlet" />
-          <artifact artifactId="weld-build-config" />
-          <artifact artifactId="jsr250-api" />
-        </includes>
-      </artifact:set>
-    </copy>
-
-    <!-- copy JSF 2 libs -->
-    <copy todir="${tomcatdir}/lib" overwrite="true">
+    <!-- copy additional JSF libs to nxserver/lib -->
+    <!-- ref: http://docs.jboss.org/richfaces/latest_4_2_X/Developer_Guide/en-US/html/chap-Developer_Guide-Getting_started_with_RichFaces.html -->
+    <copy todir="${tomcatdir}/nxserver/lib" overwrite="true">
       <artifact:set>
         <includes>
           <artifact artifactId="jsf-api" />
@@ -79,6 +66,8 @@
           <artifact artifactId="guava" />
           <artifact artifactId="cssparser" />
           <artifact artifactId="sac" />
+          <artifact artifactId="validation-api" />
+          <artifact artifactId="hibernate-validator" />
         </includes>
       </artifact:set>
     </copy>
@@ -89,6 +78,20 @@
         <includes>
           <artifact artifactId="nuxeo-platform-ui*" />
           <artifact artifactId="nuxeo-platform-forms*" />
+          <artifact artifactId="nuxeo-platform-lang*" />
+        </includes>
+      </artifact:set>
+    </copy>
+
+    <!-- copy Weld libs -->
+    <copy todir="${tomcatdir}/nxserver/lib" overwrite="true">
+      <artifact:set>
+        <includes>
+          <artifact artifactId="cdi-api" />
+          <!-- add javax.inject.jar (version 1) for RF? -->
+          <artifact artifactId="jsr250-api" />
+          <artifact artifactId="weld-servlet" />
+          <artifact artifactId="weld-build-config" />
         </includes>
       </artifact:set>
     </copy>

@@ -119,7 +119,7 @@
         <groupId>org.hibernate</groupId>
         <artifactId>hibernate-validator</artifactId>
         <!-- upgrade from 3.1.0.GA to comply with JSR 303 for CDI -->
-        <version>4.2.0.Final</version>
+        <version>4.3.2.Final</version>
       </dependency>
       <!-- end of richfaces deps -->
 
